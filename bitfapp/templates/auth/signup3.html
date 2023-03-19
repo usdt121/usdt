@@ -1,0 +1,19 @@
+{% extends 'auth/signup.html' %}
+
+{% block form %}
+<center>
+    <i class="im im-paperplane" style="color:white; font-size:8ex;"></i>
+    <br/>
+    <p>we've sent an a verification code to your email: <br/> {{ email }}</p>
+<p style="color:red;">{{error}}</p>
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="pin" placeholder="code" id="phone" type="text" class="validate white black-text" style="padding-left:0.5ex;" required>
+
+        </div>
+    </div>
+      <button class="btn waves-effect blue" type="submit">VERIFY</button>
+      <button class="btn waves-effect green" type="button" onclick="location.reload()">NEW CODE</button>
+</center>
+<br/>
+{% endblock %}

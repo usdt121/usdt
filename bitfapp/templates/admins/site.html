@@ -1,0 +1,79 @@
+{% extends 'users/account.html' %}
+
+{% block veri %}
+<div class="row">
+    <div class="col s6" style="border:;2px solid black">
+        <a href="/admin/" class="btn"><i class="material-icons left">groups</i> MEMBERS</a>
+    </div>
+    <div class="col s6" style="border:;2px solid black">
+        <a href="/site/" class="btn"><i class="material-icons left">settings</i> SITE MANAGEMENT</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+    <form method="post" target="_self">
+        {% csrf_token %}
+        <div class="col s12 l4 ">
+            <div class="card black" style="padding:2ex;color:white;">
+                <h4>SET WALLET ADDRESS</h4>
+                <p>CURRENT WALLET ADDRESS:</p>
+                <input name="wallet" value="{{site.wallet_id}}" class="white" style="text-indent:2ex;">
+                <button type="submit" class="btn">UPDATE</button>
+            </div>
+
+        </div>
+    </form>
+
+    <form method="post" target="_self">
+        {% csrf_token %}
+        <div class="col s12 l8 ">
+            <div class="card black" style="padding:2ex;color:white;">
+                <h4>ADD PLAN [ SUBSCRIPTION ]</h4>
+                <p>NAME:<br/>
+                    <input name="sub" value="" class="white" style="text-indent:2ex;" required>
+                </p>
+                <p>
+                    DEPOSIT: <br>
+                    <input class="white" name="depo" placeholder="MIN - MAX" required>
+                </p>
+
+                <p>
+                    WITHDRAW: <br>
+                    <input class="white" name="withs" placeholder="MIN - MAX" required>
+                </p>
+                <p>
+                    Duration<br/>
+                    <input class="white" type="text" name="time" required>
+                </p>
+                <p>
+                    LIST<br/>
+                    <input class="white" type="number" name="list" required>
+                </p>
+
+                <button type="submit" class="btn">ADD</button>
+                <hr/>
+
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header" style="color:black;"><i class="material-icons" style="color:black;">filter_drama</i>VIEW ALL SUBS...</div>
+                        <div class="collapsible-body"><span>
+                            {% for sub in Sub %}
+                            <p style="color:white;">{{sub.name}} <a href="?del={{sub.name}}" class="btn right red">DELETE</a></p><hr/>
+                            {% endfor %}
+                        </span></div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+{% endblock %}

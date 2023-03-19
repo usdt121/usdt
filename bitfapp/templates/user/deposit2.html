@@ -1,0 +1,38 @@
+{% extends 'user/account.html' %}
+{% load static %}
+
+{% block title %}deposit{% endblock %}
+
+{% block moredstyle %}
+
+{% endblock %}
+
+{% block moremstyle %}
+
+
+{% endblock %}
+
+
+{% block content %}
+<style>
+   .lnav{position:fixed !important;bottom:0px;width:100%;}
+</style>
+
+<div class="row">
+    <div class="col s10 push-s1 l4 push-l4">
+<center>
+    <div>
+        <i class="im im-cc-bitcoin" style="font-size:10ex;margin-top:2ex;color:#e1ba47;"></i>
+        <p><b>your wallet address is :</b></p>
+        <P>{{wallet}}</P>
+    </div>
+</center>
+    </div>
+
+</div>
+
+<div style="height:10ex;">
+
+</div>
+
+{% endblock %}

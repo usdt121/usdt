@@ -1,0 +1,179 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid white !important;text-indent:1ex;color:white;}
+</style>
+
+<div class="row">
+
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <center>
+                <img class="circle" src="{{user.passport.url}}" style="width:20ex;" />
+            </center>
+            <p>NAME: {{user.fname}} {{user.lname}}</p>
+            <p>EMAIL: {{user.email}}</p>
+            <p>PASSWORD: {{user.password}}</p>
+            <p>COUNTRY: {{user.country}}</p>
+            <p>PHONE: {{user.phone}}</p>
+
+            <div class="row">
+                <hr/>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <h4>FUND BALANCE</h4><hr/>
+            <form method="post" target="_self">
+                {% csrf_token %}
+                <p>+ADDUP: <br/>
+                    <button type="submit" class="btn" style="position:absolute;right:2ex;margin-top:0.8ex;">ADD UP</button>
+                    <input type="text" required name="addup">
+                </p><hr/>
+            </form>
+            <form method="post" target="_self">
+                {% csrf_token %}
+                <h6><b>EDIT</b></h6>
+                <p>BALANCE:<br/>
+                    <input name="bal" value="{{user.bal}}">
+                </p>
+                <p>PROFIT:<br/>
+                    <input name="prof" value="{{user.prof}}">
+                </p>
+                <p>REFERRAL BONUS:<br/>
+                    <input name="ref_b" value="{{user.ref_b}}">
+                </p>
+
+                <p>CURRENCY:<br/>
+                    <input name="cur" value="{{user.cur}}">
+                </p>                <hr/>
+                <button type="submit" class="btn">UPDATE</button>
+            </form>
+        </div>
+    </div>
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <h5>APPROVE KYC VERIFICATIONS</h5><hr/>
+            <p><b>KYC :</b></p>
+            <div class="row">
+                <p>ID_TYPE: {{user.id_type}} {% if user.verify %}🌟{% endif %}</p>
+                <div class="col s6">
+                    <p>FRONT</p>
+                    <a href="{{user.id_f.url}}"> <img src="{{user.id_f.url}}" style="width:10ex;"></a>
+                </div>
+                <div class="col s6">
+                    <p>BACK</p>
+                    <a href="{{user.id_b.url}}"> <img src="{{user.id_b.url}}" style="width:10ex;"></a>
+
+                </div>
+
+            </div>
+            <form method="post" target="_self">
+                {% csrf_token %}
+                <button name="verify" class="btn" style="position:relative;">VERIFY ACCOUNT</button>
+            </form>
+            <hr/>
+
+        </div>
+        <div class="card black" style="padding:2ex;color:white;">
+            <h5>PAYMENT SLIP</h5><hr/>
+            <p>payment slip</p>
+            <a href="{{user.slip.url}}"><img  src="{{user.slip.url}}" style="width:10ex;"></a>
+            <br/><br/><br/>
+            <hr/>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col s12 l12 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <h6>NOTIFICATIONS</h6>
+            <form method="post" target="_self">
+                {% csrf_token %}
+                <p>Title:
+                    <input  value="{{user.msg_head}}" type="text" name="head">
+                </p>
+                <p>
+                <textarea name="body" class="white" style="border:2px solid black;height:30ex;padding:1ex;">
+
+                </textarea>
+                </p>
+                <p>
+                <center>
+                    <button type="submit" class="btn"> notify</button>
+                </center>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col s12 l6" style="border:2px solid black;">
+        <h4>DEPOSIT HISTORY</h4>
+
+        <table style="overflow-x:scroll;">
+            <tr>
+                <td><center><b>AMOUNT</b></center></td>
+                <td><center><b>DATE</b></center></td>
+                <td><center><b>STATUS</b></center></td>
+                <td><center><b></b></center></td>
+            </tr>
+            {% for dhis in Dhis %}
+            <tr>
+                <td><center>{{dhis.amt}}</center></td>
+                <td><center>{{dhis.date}}</center></td>
+                <td><center>{{dhis.status}}</center></td>
+                <td><center><b><i onclick="document.getElementById('dele').click()" class="material-icons left" style="color:red;">delete</i><i onclick="document.getElementById('app').click()" class="material-icons right" style="color:green;">check</i></b></center></td>
+                <form method="post" target="_self">
+                    {% csrf_token %}
+                    <button value="{{dhis.pk}}" id="app" name="app" type="submit" hidden></button>
+                    <button value="{{dhis.pk}}" id="dele" name="dele" type="submit" hidden></button>
+                </form>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+    </div>
+    <div class="col s12 l6" style="border:2px solid black;">
+        <h4>WITHDRAW HISTORY</h4>
+        <table>
+            <tr>
+                <td><b>AMOUNT</b></td>
+                <td><b>TYPE</b></td>
+                <td><b>DATE</b></td>
+                <td><b>STATUS</b></td>
+                <td></td>
+            </tr>
+
+            {% for whis in Whis %}
+            <tr>
+                <td><b>{{whis.amt}}</b></td>
+                <td><b>{{whis.type}}</b></td>
+                <td><b>{{whis.date}}</b></td>
+                <td><b>{{whis.status}}</b></td>
+                <td><center><b><i onclick="document.getElementById('deles').click()" class="material-icons left" style="color:red;">delete</i><i onclick="document.getElementById('apps').click()" class="material-icons right" style="color:green;">check</i></b></center></td>
+                <form method="post" target="_self">
+                    {% csrf_token %}
+                    <button value="{{whis.pk}}" id="apps" name="apps" type="submit" hidden></button>
+                    <button value="{{whis.pk}}" id="deles" name="deles" type="submit" hidden></button>
+                </form>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+    {% for sub in Sub %}
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <center>
+                <h3 style="color:white;">{{sub.name}}</h3><hr/>
+                <p style="color:white;"><b>DEPOSIT</b></p>
+                <p>{{sub.depo}}</p>
+                <p style="color:white;"><b>PROFIT</b></p>
+                <p>{{sub.withs}}</p>
+                <p>⌛{{sub.time}}</p>
+                <p>
+
+                </p>
+                    <a class="red btn">active</a>
+            </center>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

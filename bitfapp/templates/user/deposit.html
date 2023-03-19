@@ -1,0 +1,52 @@
+{% extends 'user/account.html' %}
+{% load static %}
+
+{% block title %}deposit{% endblock %}
+
+{% block moredstyle %}
+
+{% endblock %}
+
+{% block moremstyle %}
+
+
+{% endblock %}
+
+
+{% block content %}
+<style>
+   .lnav{position:fixed !important;bottom:0px;width:100%;}
+</style>
+
+<div style="margin-left:2ex;"><i class="im im-cc-bitcoin" style="font-size:10ex;"> </i><span style="font-size:3ex;margin:1.5ex 0px 0px 3ex;position:absolute;">CRYPTO DEPOSIT</span> </div>
+<p style="margin-left:5ex;">AMOUNT</p>
+<form target="_self" method="post">
+
+<div class="row">
+    <form class="col s12">
+        {% csrf_token %}
+        <div class="row">
+
+            <div class="input-field col s2 push-s1">
+                <input VALUE="$" id="first_nam" type="text" class="validate center" style="border:2px solid green;font-weight:bold;" readonly>
+
+            </div>
+
+            <div class="input-field col s8 push-s1">
+                <input name="amount" placeholder="AMOUNT" id="first_name" type="text" class="validate" style="border:2px solid green;padding-left:5px;">
+
+            </div>
+
+        </div>
+                <center>
+            <button class="btn waves-effect" type="submit" id="">NEXT</button>
+        </center>
+    </form>
+</div>
+</form>
+
+<div style="height:10ex;">
+
+</div>
+
+{% endblock %}

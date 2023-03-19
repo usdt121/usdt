@@ -1,0 +1,33 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+    <form method="post" target="_self">
+        {% csrf_token %}
+        <div class="col s12 l5 push-l2">
+            <div class="card" style="padding:2ex;">
+                <h4><b>AMOUNT</b></h4><hr/>
+                <center>
+                    <img src="https://cdn-icons-png.flaticon.com/128/3936/3936902.png"
+                         style="width:50%;">
+
+                </center>
+                <hr/>
+                <p>
+                    <input name="amt" placeholder="ENTER AMOUNT" type="text" >
+                </p>
+                <p>
+                <center>
+                    <button type="submit" class="btn black">NEXT</button>
+                </center>
+                </p>
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

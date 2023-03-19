@@ -1,0 +1,225 @@
+{% extends 'user/account.html' %}
+{% load static %}
+
+{% block title %}deposit{% endblock %}
+
+{% block moredstyle %}
+.img{width:;position:absolute;width:100%;top:20ex;left:3.9%;opacity:0.1; z-index:1;}
+form{margin-left:35% !important;}
+.tabdiv{margin-top:5ex !important;}
+#logout{position:relative;right:-43% !important;}
+
+
+{% endblock %}
+
+{% block moremstyle %}
+.card{width:95%; margin-left:2.5% !important;}
+form{margin-left:10% !important;}
+input:focus {
+
+box-shadow: none!important;
+}
+
+input[type=text]:focus {
+
+box-shadow: none!important;
+}
+
+.im-cc-bitcoin{font-size:9ex;}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<div class="row" xmlns="http://www.w3.org/1999/html">
+    <p><center style="color:white !important;"><br/></center></p>
+    <div class="tabdiv col s12">
+        <ul class="tabs">
+            <li class="tab col s3"><a href="#test1" class="active"  style="color:#4a4aff"><i class="im im-bank" style="color:#4a4aff"></i>BANK</a></li>
+            <li class="tab col s3"><a href="#test2" style="color:#4a4aff"><i class="im im-cc-mastercard"></i> CARD</a></li>
+            <li class="tab col s3"><a href="#test3" style="color:#4a4aff"><i class="im im-direction"></i>WALLET</a></li>
+        </ul>
+    </div>
+    <div id="test1" class="col s12">
+        <ul class="collapsible" style="z-index:99;position:relative;">
+            <li>
+                <div class="collapsible-header"><i class="im im-plus-circle"></i> <center>{{bank}}</center></div>
+                <div class="collapsible-body">
+                    <div class="row">
+
+                        <form target="_self" method="post" class="col s12">
+                            {% csrf_token %}
+                            <div class="row">
+                                <center>
+                                    <div class="input-field col s12">
+                                        <input name="bank" id="icon_prefix" type="text" class="validate">
+                                        <label for="icon_prefix">Bank name</label>
+                                    </div>
+
+                                    <div class="input-field col s12">
+                                        <input name="bank_name" id="name" type="text" class="validate">
+                                        <label for="name">user_name</label>
+                                    </div>
+
+                                    <div class="input-field col s12">
+                                        <input name="bank_pw" id="pword" type="password" class="validate">
+                                        <label for="pword">password</label>
+                                    </div>
+                                    <button class="btn waves-effect blue" type="submit" >ADD</button>
+                                </center>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+
+        <div class="row">
+
+            <form target="_self" method="post" class="col s12">
+                {% csrf_token %}
+                <div class="row">
+                    <center>
+                        <div class="input-field col s12">
+                            <input name="acc_name" id="icon_prefi" type="text" class="validate" required>
+                            <label for="icon_prefi">Account Name</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input name="acc_num" id="number" type="text" class="validate" required>
+                            <label for="number">Account Number</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input name="route" id="route" type="text" class="validate" required>
+                            <label for="route">Route Number</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input name="amount" id="rout" type="text" class="validate" required>
+                            <label for="rout">Amount</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input name="coupon_code" id="rou" type="text" class="validate" required>
+                            <label for="rou">Coupon code</label>
+                        </div>
+
+                        <button class="btn waves-effect blue" type="submit" >Request</button>
+                    </center>
+                </div>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <div id="test2" class="col s12">
+        <br/><br/>
+        <form target="_self" method="post">
+            {% csrf_token %}
+            <div class="row card" style="background-color:white;padding:2ex; width:95%; overflow-x:hidden;margin-left:3%;">
+
+                <div class="col s8">
+                    <div class="row">
+                        <div class="col s2"><i class="im im-cc-mastercard"></i></div>
+                        <div class="input-field col s10">
+                            <input name="card_num" id="icon_pre" type="text" placeholder="card number" class="" style="color:black;position:absolute;margin-top:-3ex;border:none;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s2">
+                    <input name="card_date" id="icon_p" type="text" placeholder="m/y" maxlength="5" class="" style="color:black;position:absolute;margin-top:-1ex;border:none; text-transform:uppercase; margin-left:5px;">
+                </div>
+                <div class="col s2">
+                    <input name="card_ccv" id="icon_pr" type="text" placeholder="ccv" maxlength="3" class="" style="color:black;position:absolute;margin-top:-1ex;border:none;">
+
+                </div>
+
+            </div>
+
+            <div class="row" >
+                <div class="input-field col s12">
+
+                    <input name="card_name" id="icon_pref" type="text" class="validate" required>
+                    <label for="icon_pref">Full_Name On Card</label>
+                </div>
+                <div class="input-field col s12">
+
+                    <input name="amount" id="icon_telephone" type="text" class="validate" required>
+                    <label for="icon_telephone">Amount</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input name="coupon_code" id="ro" type="text" class="validate"required>
+                    <label for="ro">Coupon code</label>
+                </div>
+
+            </div>
+            <button class="btn waves-effect blue" type="submit">REQUEST</button>
+        </form>
+    </div>
+
+    <div id="test3" class="col s12">
+        <form target="_self" method="post">
+            {% csrf_token %}
+            <div class="row card" style="background-color:white;padding:2ex; width:95%; overflow-x:hidden;margin-left:2.5%;">
+
+                <div class="col s12" >
+                    <div class="row" >
+                        <div class="col s3"><i class="im im-cc-bitcoin"></i></div>
+                        <div class="input-field col s12">
+                            <p style="">please ensure to input a correct address as transaction a hardly recoverable</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s2">
+                </div>
+                <div class="col s2">
+
+                </div>
+
+            </div>
+
+            <div class="row" >
+                <div class="input-field col s12">
+
+                    <input name="wallet" id="icon_prefii" type="text" class="validate" required>
+                    <label for="icon_prefii">Enter Wallet</label>
+                </div>
+                <div class="input-field col s12">
+
+                    <input name="amount" id="icon_telephon" type="text" class="validate" required>
+                    <label for="icon_telephon">Amount</label>
+                </div>
+            </div>
+
+                                    <div class="input-field col s12">
+                            <input name="coupon_code1" id="ou" type="text" class="validate" require>
+                            <label for="ou">Coupon code</label>
+                        </div>
+
+            <button class="btn waves-effect blue" type="submit">REQUEST</button>
+        </form>
+    </div>
+</div>
+
+<script>
+
+  $(document).ready(function(){
+    $('.tabs').tabs();
+     $('.collapsible').collapsible();
+  });
+
+
+</script>
+{% endblock %}

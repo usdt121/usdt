@@ -1,0 +1,72 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+    <div class="col s12 l5 push-l2">
+        <div class="card" style="padding:2ex;">
+            <h4><b><i class="material-icons">edit</i>PROFILE</b></h4><hr/>
+            <form id="fotos" method="post" target="_self" enctype="multipart/form-data">
+                {% csrf_token %}
+                <center>
+                    <img {% ifequal user.passport None %} src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"{% endifequal %}
+                         {% if user.passport %} src="{{user.passport.url}}" class="circle" {% endif %}
+                         style="width:50%;">
+                    <i class="material-icons" onclick="document.getElementById('foto').click()">edit</i>
+                    <input name="foto" oninput="document.getElementById('pp').click()" id="foto" type="file" hidden>
+                    <button id="pp" type="submit" name="pp" hidden></button>
+                </center>
+            </form>
+            <form  method="post" target="_self" enctype="multipart/form-data">
+                {% csrf_token %}
+                <hr/>
+                <p><b>First Name</b><br/>
+                    <input name="fname" value="{{user.fname}}" type="text" required>
+                </p>
+                <p><b>Last Name</b><br/>
+                    <input required name="lname" value="{{user.lname}}" type="text" >
+                </p>
+                <p><b>Email</b><br/>
+                    <input type="text" required name="email" value="{{user.email}}" >
+                </p>
+                <p><b>Country</b><br/>
+                    <input type="text" required name="country" value="{{user.country}}">
+                </p>
+                <p><b>Phone</b><br/>
+                    <input type="text" required name="phone" value="{{user.phone}}" >
+                </p>
+
+                <p>
+                <center>
+                    <button name="update" class="btn black">UPDATE</button>
+                </center>
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="col s12 l4 push-l2">
+        <form target="_self" method="post">
+            {% csrf_token %}
+            <div class="card" style="padding:2ex;">
+                <h5><b>CHANGE PASSWORD</b></h5>
+                <p style="color:red;text-align:center;">{{info}}</p>
+                <p><b>NEW PASSWORD</b><br/>
+                    <input name="pword" type="text" required >
+                </p>
+                <p><b>CONFIRM PASSWORD</b><br/>
+                    <input name="pword_c" type="text"  required>
+                </p>
+                <p>
+                <center>
+                    <button class="btn" type="submit">CHANGE PASSWORD</button>
+                </center>
+                </p>
+
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

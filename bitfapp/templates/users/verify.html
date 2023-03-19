@@ -1,0 +1,41 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;}
+</style>
+
+<div class="row">
+    <div class="col s12 l5 push-l2">
+        <form method="post" target="_self" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card" style="padding:2ex;">
+                <h4><b><i class="material-icons">remember_me</i>VERIFY ACCOUNT</b></h4><hr/>
+                <p>
+                    <label>SELECT DOCUMENT TYPE</label>
+                    <select required name="id_type" class="browser-default" style="border:2px solid black;">
+                        <option value="NATION ID CARD">NATIONAL ID CARD</option>
+                        <option value="VOTERS CARD">VOTERS CARD</option>
+                        <option value="PASSPORT">PASSPORT</option>
+                        <option value="DRIVER LICENSE">DRIVER LICENSE</option>
+                    </select>
+                </p>
+                <P>
+                    <label style="font-size:2.5ex;">FRONT</label><br/>
+                    <input required name="id_f" class="" type="file" style="padding:2ex;width:100%;">
+                </P>
+                <P>
+                    <label style="font-size:2.5ex;">BACK</label><br/>
+                    <input name="id_b" required class="" type="file" style="padding:2ex;width:100%;">
+                </P>
+                <p>
+                <center>
+                    <button type="submit" class="btn black"><i class="material-icons left">contact_emergency</i>SUBMIT DOCUMENT</button>
+                </center>
+                </p>
+
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

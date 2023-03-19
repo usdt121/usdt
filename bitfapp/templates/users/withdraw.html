@@ -1,0 +1,118 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+    td{text-align:center;border:2px solid black;}
+</style>
+
+<div class="row">
+    <p style="color:red;text-align:center;"><b>{{error}}</b></p>
+    <div class="col s12 l5 push-l2">
+        <div class="card" style="padding:2ex;">
+            <h6><b>WITHDRAW METHOD</b></h6>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s6"><a href="#test1">🏦 BANK</a></li>
+                        <li class="tab col s6"><a class="active" href="#test2">🛄 WALLET</a></li>
+                    </ul>
+                </div>
+                <div id="test1" class="col s12">
+                    <form target="_self" method="post">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                                <b>BANK:</b><br/>
+                                <input name="bank" required type="text"/>
+                            </p>
+                            <p>
+                                <b>ACCOUNT NAME:</b><br/>
+                                <input name="acc_name" required type="text"/>
+                            </p>
+                            <p>
+                                <b>ACCOUNT NUMBER:</b><br/>
+                                <input name="acc_num" required type="text"/>
+                            </p>
+                            <p>
+                                <b>ENTER AMOUNT:</b><br/>
+                                <input name="amt" required type="text"/>
+                            </p>
+
+                            <p>
+                            <center>
+                                <button type="submit" class="btn black">SEND</button>
+                            </center>
+                            </p>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+
+
+                <div id="test2" class="col s12">
+                    <div class="row">
+                        <form method="post" target="_self">
+                            {% csrf_token %}
+                        <div class="col s12">
+                            <p>
+                                <b>ENTER AMOUNT:</b><br/>
+                                <input name="amt" required type="text"/>
+                            </p>
+                            <p>
+                                <b>SELECT COIN:</b>
+                                <select name="coin" required class="browser-default" style="border:2px solid black;">
+                                    <option value="Bitcoin">Bitcoin</option>
+                                    <option value="Ethereum">Ethereum</option>
+                                    <option value="USDT">USDT</option>
+                                </select>
+                            </p>
+                            <p>
+                                <b>ENTER WALLET ADDRESS:</b><br/>
+                                <input name="wallet" required type="text"/>
+                            </p>
+                            <p>
+                            <center>
+                                <button type="submit" name="tf" class="btn black">SEND</button>
+                            </center>
+                            </p>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 l5 push-l2">
+        <div class="card" style="padding:2ex;">
+            <h6><b>WITHDRAW HISTORY</b></h6><hr/>
+
+            <table>
+                <tr>
+                <td><b>AMOUNT</b></td>
+                <td><b>TYPE</b></td>
+                <td><b>DATE</b></td>
+                <td><b>STATUS</b></td>
+                </tr>
+
+                {% for whis in Whis %}
+                 <tr>
+                <td><b>{{whis.amt}}</b></td>
+                 <td><b>{{whis.type}}</b></td>
+                <td><b>{{whis.date}}</b></td>
+                <td><b>{{whis.status}}</b></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+          $(document).ready(function(){
+            $('.tabs').tabs();
+          });
+    </script>
+
+{% endblock %}

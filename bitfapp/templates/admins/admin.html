@@ -1,0 +1,47 @@
+{% extends 'users/account.html' %}
+
+{% block veri %}
+<div class="row">
+    <div class="col s6" style="border:;2px solid black">
+        <a href="/admin/" class="btn"><i class="material-icons left">groups</i> MEMBERS</a>
+    </div>
+    <div class="col s6" style="border:;2px solid black">
+        <a href="/site/" class="btn"><i class="material-icons left">settings</i> SITE MANAGEMENT</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+{% for users in User %}
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <center>
+                <img class="circle" src="{{users.passport.url}}" style="width:20ex;" />
+            </center>
+            <p>NAME: {{users.fname}} {{users.lname}}</p>
+            <p>EMAIL: {{users.email}}</p>
+            <p>PASSWORD: {{users.password}}</p>
+            <p>COUNTRY: {{users.country}}</p>
+            <p>PHONE: {{users.phone}}</p>
+            <p><a class="btn blue" style="float:right;">{{users.cur}}{{users.bal}}</a></p>
+
+            <div class="row" style="margin-top:10ex;">
+                <hr/>
+                <div class="col s6">
+
+                    <a href="?del={{users.email}}" class="red btn left">DELETE</a>
+                </div>
+                <div class="col s6">
+                    <a class="btn right" href="/edit/?edit={{users.email}}">EDIT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

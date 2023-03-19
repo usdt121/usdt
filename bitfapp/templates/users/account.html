@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100%;overflow-x:hidden;">
+<head>
+    <!--        <script>-->
+    <!--        if(window.location.protocol === "http:") {-->
+    <!--           window.location.protocol = "https:";-->
+    <!--        }-->
+    <!--    </script>-->
+    {% load static %}
+    <meta charset="UTF-8">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}FXCCEXOERTTRADE{% endblock %}</title>
+    <!--the jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--the iconmntra-->
+    <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css">
+    <!-- the fav icon -->
+    <link rel="icon" type="image/png" href="https://www.fxcc.com/sites/all/themes/fxcc/images/logo.png"/>
+
+
+    <!--the AOS lib-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+
+
+    <!--the style-->
+
+    <style>
+    /* for mobile */
+    @media (max-width:992px){
+        .hideM{display:none;}
+        .logtxt{font-size:1ex;top:-3ex!important;left:-1ex;}
+    }
+
+    /* for desktop */
+    @media (min-width:992px){
+        .prof{right:2ex !important;}
+        .hideD{display:none;}
+    }
+    </style>
+    <!--the style ends-->
+</head>
+
+<body>
+<div style="position:fixed;width:100%;z-index:10;">
+    <nav class="black">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo left" style="margin-left:3ex;"><img src="https://res.cloudinary.com/noor121/image/upload/v1664355452/logog_hzfiif.jpg" style="width:7ex;" class="circle" /><span class="logtxt" style="position:relative;top:-1ex;">GLOGALBITMINING</span></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal" style="color:black !important;">
+                <div class="modal-content">
+                    <h4>{{user.msg_head}}</h4>
+                    <p>{{user.msg_body}}</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+            <ul class="right">
+                {% if user.msg_head %}
+                <li data-target="modal1" class="modal-trigger"><img src="https://cdn-icons-gif.flaticon.com/8121/8121323.gif" class="circle" style="width:5ex; position:relative;left:-3ex;top:1.3ex;"></li>
+                {% endif %}
+                <li class="hideD">
+                    <i onclick="document.getElementById('pop').click()" class="material-icons" style="font-size:5.5ex;margin-right:1ex;">account_circle</i>
+                    </a></li>
+                <span class="hide-on-med-and-down">
+                 <li><a href="badges.html" >
+                     <a class="btn blue"> <i class="material-icons left">live_help</i> support </a>
+                 </a></li>
+                <li><a href="/verify/" class="btn">Verification</a></li>
+                <li><a href="/logout/" class="btn red"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+            </span>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<ul class="sidenav" id="mobile-demo" style="background-color:#171616f5;padding-left:5ex;">
+    <div class="row">
+        <div class="col s12">
+            <br/>
+            {% ifequal user.passport None %}
+            <i class="material-icons" style="font-size:12ex;color:white;">person</i>
+            {% endifequal %}
+            {% if user.passport %}
+            <img class="circle" src="{{user.passport.url}}" style="width:100%;" />
+            {% endif %}
+        </div>
+        <div class="col s12" style="color:white;">
+            <h6 style="margin-top:6ex;">HELLO</h6>
+            <p style="margin-top:-1ex;margin-bottom:3ex;">{{user.fname}} {{user.lname}}</p>
+        </div>
+    </div>
+
+
+    <p>
+        <a href="/account/" class="btn white" style="width:80%;color:black;"><img src="https://cdn-icons-png.flaticon.com/512/748/748060.png" style="width:3ex;margin-top:0.6ex;" class="left" />DASHBOARD</a>
+    </p>
+    <p>
+        <a href="/profile/" class="btn white" style="width:80%;color:black;"><i class="material-icons left" style="color:black;">person</i>ACCOUNT</a>
+    </p>
+    <p>
+        <a href="/act/" class="btn white" style="width:80%;color:black;"><i class="material-icons left" style="color:black;">equalizer</i>ACTIVE PLAN</a>
+    </p>
+    <br/>
+    <p>
+        <a href="mailto:" class="btn white" style="width:80%;color:black;"><i class="material-icons left" style="color:black;">contact_support</i>SUPPORT</a>
+    </p>
+
+    <p>
+        <a href="/deposit/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">payments</i>DEPOSIT</a>
+    </p>
+    <p>
+        <a href="/withdraw/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">euro_symbol</i>WITHDRAW</a>
+    </p>
+    <p>
+        <a href="/ref/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">groups</i>REFERRALS</a>
+    </p>
+    <p>
+        <a href="/plan/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">settings_suggest</i>SUBSCRIPTION</a>
+    </p>
+</ul>
+
+
+<div class="row" style="">
+    <div class="col s12 l4 prof" style="position:fixed;z-index:2;margin-top:3.5ex;">
+        <ul class="collapsible">
+            <li>
+                <div id="pop" class="collapsible-header" style="display:none;"><i class="material-icons">filter_drama</i>First</div>
+                <div class="collapsible-body white">
+                    <div class="row">
+                        <div class="col s5">
+                            <center>
+                                {% ifequal user.passport None %}
+                                <i class="material-icons" style="font-size:13ex;">person</i>
+                                {% endifequal %}
+                                {% if user.passport %}
+                                <img src="{{user.passport.url}}" style="width:50%;" class="circle">
+                                {% endif %}
+                                <br/><b class="" style="margin-left:-10ex;">HI</b>
+                                <P style="position:absolute;margin-top:-1ex;"><b>{{user.fname}} {{user.lname}}</b></P>
+                            </center>
+                        </div>
+                        <div class="col s7">
+                            <p><a class="btn right blue"><i class="material-icons left" >person</i>KYC_UPLOAD</a></p>
+                            <p style="position:relative;top:1ex;"><a class="btn right"><i class="material-icons left" >person</i> PROFILE</a></p>
+                            <p style="position:relative;top:2.5ex;"><a style="background-color:white;border:2px solid red;color:red;" class="btn right"><i class="material-icons left" >power_settings_new</i> LOGOUT</a></p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row" style="position:relative;top:8ex;">
+    <!--desktop navigation-->
+    <div class="col l3">
+        <div class="hideM"  style="background-color:#171616f5;position:fixed;height:100%;left:0ex;width:50ex;top:8.5ex;padding-left:3ex;">
+            <div class="row">
+                <div class="col l4">
+                    <br/>
+                    {% ifequal user.passport None %}
+                    <i class="material-icons" style="font-size:12ex;color:white;">person</i>
+                    {% endifequal %}
+                    {% if user.passport %}
+                    <img class="circle" src="{{user.passport.url}}" style="width:100%;" />
+                    {% endif %}
+                </div>
+                <div class="col l7" style="color:white;">
+                    <h6 style="margin-top:6ex;">HELLO</h6>
+                    <p style="margin-top:-1ex;margin-bottom:3ex;">{{user.fname}} {{user.lname}}</p>
+                </div>
+
+            </div>
+            <p>
+                <a href="/account/" class="btn white" style="width:80%;color:black;"><img src="https://cdn-icons-png.flaticon.com/512/748/748060.png" style="width:3ex;margin-top:0.6ex;" class="left" />DASHBOARD</a>
+            </p>
+            <p>
+                <a href="/profile/" class="btn white" style="width:80%;color:black;"><i class="material-icons left" style="color:black;">person</i>ACCOUNT</a>
+            </p>
+
+
+            <p>
+                <a href="/act/" class="btn white" style="width:80%;color:black;"><i class="material-icons left" style="color:black;">equalizer</i>ACTIVE PLAN</a>
+            </p><hr/>
+            <br/>
+
+
+            <p>
+                <a href="/deposit/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">payments</i>DEPOSIT</a>
+            </p>
+            <p>
+                <a href="/withdraw/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">euro_symbol</i>WITHDRAW</a>
+            </p>
+            <p>
+                <a href="/ref/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">groups</i>REFERRALS</a>
+            </p>
+            <p>
+                <a href="/plan/" class="btn white" style="width:80%;color:black !important;"><i class="material-icons left">settings_suggest</i>SUBSCRIPTION</a>
+            </p>
+        </div>
+    </div>
+
+    <!--desktop navigation ends-->
+
+    <!--the main-->
+
+    <div class="col s12 l9">
+        <div class="col s12">
+            {% block veri %}
+            {% ifequal user.verify None %}
+            <div class="card" style="padding:2ex;">
+                {% ifequal user.id_type None %}
+                <div class="row">
+                    <div class="col s8">
+                        <span ><b>  ⚠️:Warning your Account is not verified KYC verification required. </b></span>
+                    </div>
+                    <div class="col s4">
+                        <a href="/verify/" class="btn right">VERIFY</a>
+
+                    </div>
+                </div>
+                {% endifequal %}
+
+
+                {% if user.id_type %}
+                <div class="row">
+                    <div class="col 12" style="padding:2ex;">
+                        <img src="https://cdn-icons-gif.flaticon.com/6569/6569123.gif" style="width:7ex;">
+                        DOCUMENT ARE BEING CHECKED AND VERIFIED THIS WILL TAKE A MAXIMUM OF 24HRS
+                    </div>
+                </div>
+                {% endif %}
+
+
+            </div>
+            {% endifequal %}
+
+            {% endblock %}
+            <!--end content-->
+
+        </div>
+
+        {% block main %}
+
+        <div class="row">
+            <!--the main cont-->
+            <div class="col s12 l4">
+                <div class="card" style="padding:2ex;background-color:#282222;color:white;">
+                    <div class="row">
+                        <div class="col s4">
+                            <img class="circle" src="https://cdn-icons-gif.flaticon.com/6416/6416395.gif" style="width:100%;" >
+                        </div>
+                        <div class="col s8">
+                            <h5><b>BALANCE:</b></h5>
+                            <h3 style="position:relative;top:-1ex">{{user.cur}} {{user.bal}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 l4">
+                <div class="card" style="padding:2ex;background-color:blue;color:white;">
+                    <div class="row">
+                        <div class="col s4">
+                            <img class="circle" src="https://cdn-icons-gif.flaticon.com/7211/7211788.gif" style="width:100%;">
+                        </div>
+                        <div class="col s8">
+                            <h5><b>PROFIT:</b></h5>
+                            <h3 style="position:relative;top:-1ex">{{user.cur}} {{user.prof}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card" style="padding:2ex;background-color:#ae1e1e;color:white;">
+                    <div class="row">
+                        <div class="col s4">
+                            <i class="material-icons" style="color:white;font-size:10ex;">groups</i>
+                        </div>
+                        <div class="col s8">
+                            <h5><b>REFERRAL BONUS:</b></h5>
+                            <h3 style="position:relative;top:-1ex">{{user.cur}} {{user.ref_b}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12" style="height:55ex;">
+                <h4>FOREX MARKET FUNDAMENTAL DATA</h4>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener" target="_blank"><span class="blue-text">Exchange Rates</span></a> by TradingView</div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+  {
+  "width": "100%",
+  "height": "100%",
+  "currencies": [
+    "EUR",
+    "USD",
+    "JPY",
+    "GBP",
+    "CHF",
+    "AUD",
+    "CAD",
+    "NZD",
+    "CNY"
+  ],
+  "isTransparent": false,
+  "colorTheme": "light",
+  "locale": "en"
+}
+  </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+
+        </div>
+        <!--the main ends-->
+        {% endblock %}
+    </div>
+</div>
+<script>
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+  });
+
+</script>
+
+</body>
+
+</html>

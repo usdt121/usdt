@@ -1,0 +1,21 @@
+{% extends 'auth/signup.html' %}
+
+{% block form %}
+    <input name="passport" style="display:none;">
+    <div class="file-field input-field">
+       <center> <i class="im im-user-circle" style="font-size:15ex;"></i></center>
+
+      <div class="btn">
+        <span>ID</span>
+        <input name="img" type="file">
+      </div>
+
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+                    <center>
+                        <button class="btn waves-effect blue" type="submit">NEXT</button>
+                     </center>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+</style>
+
+<div class="row">
+    <p style="color:red;">{{error}}</p>
+    {% for sub in Sub %}
+    <div class="col s12 l4 ">
+        <div class="card black" style="padding:2ex;color:white;">
+            <center>
+                <h3 style="color:white;">{{sub.name}}</h3><hr/>
+                <p style="color:white;"><b>DEPOSIT</b></p>
+                <p>{{sub.depo}}</p>
+                <p style="color:white;"><b>PROFIT</b></p>
+                <p>{{sub.withs}}</p>
+                <p>⌛{{sub.time}}</p>
+                <p>
+                <form method="post" target="_self">
+                    {% csrf_token %}
+                    <button style="position:absolute;margin-top:0.7ex;right:2ex;" class="btn">SUBSCRIBE</button>
+                    <input name="amt" class="white" type="text" placeholder="ENTER AMOUNT">
+                <input name="sub" value="{{sub.name}}" hidden>
+                </form>
+                </p>
+
+            </center>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

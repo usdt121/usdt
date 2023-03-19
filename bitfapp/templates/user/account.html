@@ -1,0 +1,174 @@
+{% extends 'index/index.html' %}
+{% block title %}account{% endblock %}
+
+
+{% block dnav %}
+<div style="position:relative;">
+    <li><a href="/account/">Dashboard</a></li>
+    <li><a href="/history/">History</a></li>
+    <li><a href="/logout/">logout</a></li>
+
+    {% if user.code == site.admin_pin %}
+    <li><a href="/admin/" class="btn green">Admin</a></li>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block mnav %}
+<a href="sass.html">
+
+    <div>
+        <div class="" style="overflow:hidden;height:30ex;transparent:0.6;">
+            <center>
+                <img  style="width:100%;" src="{{ user.passport.url }}">
+            </center>
+        </div>
+    </div>
+
+</a>
+<span class="card-title" style="background-color:#8da2e894;padding:1ex !important; font-size:3ex;"><b>{{user.fname}} {{user.lname}}</b></span>
+
+<li><a href="/account/">Dashboard</a></li>
+<li><a href="/history/">History</a></li>
+<li><a href="/logout/">logout</a></li>
+<br/><br/>
+{% if user.code == site.admin_pin %}
+<li><a href="/admin/" class="btn green">Admin</a></li>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<!--the styles-->
+<style>
+    @media (max-width:992px){
+        .ID{display:none;}
+        {% block moremstyle %}
+        {% endblock %}
+    }
+
+    @media (minx-width:992px){
+
+        {% block moredstyle %}
+        {% endblock %}
+    }
+
+        {% block moregstyle %}
+        {% endblock %}
+
+    body{background-color:#050f30;}
+</style>
+<!--end of style tag-->
+{% if user.msg_head %}
+<p style="margin-bottom:-2ex;">
+    <a class="btn waves-effect red pulse white-text modal-trigger" style="margin-left:3ex;" href="#modal1" id="mod"><i class="im im-bell"></i></a>
+</p>
+
+<!-- Modal Trigger -->
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>{{user.msg_head}}</h4>
+        <p>{{user.msg_body}}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="document.getElementById('mod').style.display='none'">Agree</a>
+    </div>
+</div>
+{% endif %}
+
+
+<div class="row">
+    <div class="col s12 l8">
+        <div class="col-12">
+            <div id="chart-page">
+                <div class="tradingview-widget-container" style="margin:30px 0px 10px 0px;">
+                    <div id="tradingview_f933e"><div id="tradingview_904d2-wrapper" style="position: relative;box-sizing: content-box;width: 100%;height: calc(550px - 32px);margin: 0 auto !important;padding: 0 !important;font-family:Arial,sans-serif;"><div style="width: 100%;height: calc(550px - 32px);background: transparent;padding: 0 !important;"><iframe id="tradingview_904d2" src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_904d2&amp;symbol=COINBASE%3ABTCUSD&amp;interval=1&amp;hidesidetoolbar=0&amp;symboledit=1&amp;saveimage=1&amp;toolbarbg=f1f3f6&amp;studies=BB%40tv-basicstudies&amp;theme=dark&amp;style=9&amp;timezone=Etc%2FUTC&amp;studies_overrides=%7B%7D&amp;overrides=%7B%7D&amp;enabled_features=%5B%5D&amp;disabled_features=%5B%5D&amp;locale=en&amp;utm_source=legitcryptoauction.com&amp;utm_medium=widget_new&amp;utm_campaign=chart&amp;utm_term=COINBASE%3ABTCUSD" style="width: 100%; height: 100%; margin: 0 !important; padding: 0 !important;" frameborder="0" allowtransparency="true" scrolling="no" allowfullscreen=""></iframe></div></div></div>
+                    <div class="tradingview-widget-copyright" style="width: 100%;"><a href="#" rel="noopener" target="_blank"><span class="blue-text"></span> <span class="blue-text"></span></a></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                    <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "width": "100%",
+  "height": "550",
+  "symbol": "COINBASE:BTCUSD",
+  "interval": "1",
+  "timezone": "Etc/UTC",
+  "theme": 'dark',
+  "style": "9",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "calendar": false,
+  "studies": [
+    "BB@tv-basicstudies"
+  ],
+  "container_id": "tradingview_f933e"
+}
+  );
+  </script>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- the balance info-->
+    <div class="col s12 l4">
+
+        <div class="ID card">
+            <div class="card-image" style="overflow:hidden;height:30ex;transparent:0.6;">
+                <center>
+                    <img  style="width:80%;" src="{{user.passport.url}}">
+                </center>
+                <span class="card-title" style="background-color:#8da2e894;padding:1ex !important;color:black;"><b>{{user.fname}} {{user.lname}}</b></span>
+            </div>
+
+
+        </div>
+
+        <div class="amt collection">
+            <a href="#!" class="collection-item" style="height:10ex;"><span class="badge" ></span>
+                <img src="data:image/png;base64,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"
+                style="width:12ex;"/>
+                <span style="position:absolute;margin-top:1ex;font-size:2.5ex;">BALANCE</span>
+                <span style="position:absolute;margin-top:1ex;font-size:2.5ex;right:2ex;"><b>{{user.cur}}{{user.balance}}</b></span>
+            </a>
+            <a href="#!" class="collection-item"><span class="badge"><b>{{user.cur}}{{user.int_bal}}</b></span>
+                <i class="im im-banknote" style="margin-right:10%;color:#be2aac;"> </i> STARTING AMOUNT
+            </a>
+
+            <a href="#!" class="collection-item"><span class="badge"><b>{{user.cur}}{{user.profit}}</b></span>
+                <i class="im im-line-chart-up" style="margin-right:10%;"> </i> PROFIT
+            </a>
+
+            <a href="#!" class="collection-item"><span class="badge"><b>{{user.cur}}{{user.bonus}}</b></span>
+                <i class="im im-gift red-text" style="margin-right:10%;"> </i> BONUS
+            </a>
+            <a href="#!" class="collection-item"><span class="badge"><b>{{user.cur}}{{user.ref}}</b></span>
+                <i class="im im-share blue-text" style="margin-right:10%;"> </i> REFERRAL BONUS
+            </a>
+        </div>
+        <a href="/deposit/" class="waves-effect waves-light btn-large red"><i class="im im-import left"></i>Deposit</a>
+        <a href="/withdraw/" class="waves-effect waves-light btn-large"><i class="im im-navigation left"></i>withdraw</a>
+
+
+    </div>
+
+</div>
+<script>
+      $(document).ready(function(){
+    $('.modal').modal();
+  });
+
+</script>
+
+{% block footer%}
+{% endblock %}
+
+{% endblock %}

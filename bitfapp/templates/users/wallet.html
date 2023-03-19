@@ -1,0 +1,67 @@
+{% extends 'users/account.html' %}
+
+{% block main %}
+<style>
+    input{border:2px solid black !important;text-indent:1ex;}
+    td{text-align:center;border:2px solid black;}
+
+</style>
+
+<div class="row">
+    {% if info %}
+    <div class="col s12" id="suc">
+        <div class="card" style="padding:2ex;">
+            <img src="https://cdn-icons-gif.flaticon.com/6569/6569123.gif" style="width:20ex;">
+            <P>UPLOAD WAS SUCCESSFUL</P>
+            <a href="/account/" onclick="document.getElementById('suc').style.display='none' " class="btn right">okay</a>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col s12 l5">
+        <div class="card" style="padding:2ex;">
+            <h6><b>WALLET</b></h6><hr/>
+            <center>
+                <img src="https://cdn-icons-png.flaticon.com/128/5968/5968260.png"
+                     style="width:50%;">
+                <input id="foto" type="file" hidden>
+            </center>
+            <hr/>
+            <form method="post" target="_self" enctype="multipart/form-data">
+                {% csrf_token %}
+            <p>Make payment to the below wallet address:
+                <button  class="btn black" style="position:absolute;margin-top:3.5ex;right:2ex;">copy</button>
+                <input readonly value="{{site.wallet_id}}" type="text" >
+            </p>
+
+            <p style="background-color:black;padding:2ex;color:white;">
+                <b>upload payment slip</b>
+                <input name="slip" class="white" type="file" style="padding:2ex;" />
+                <br/><br/>
+                <button name="upload" type="submit" class="btn" type="submit">UPLOAD</button>
+            </p>
+            </form>
+
+        </div>
+    </div>
+    <div class="col s12 l7">
+        <div class="card" style="padding:2ex;">
+            <h6><b>DEPOSIT HISTORY</b></h6><hr/>
+            <table>
+                <tr>
+                    <td><center><b>AMOUNT</b></center></td>
+                    <td><center><b>DATE</b></center></td>
+                    <td><center><b>STATUS</b></center></td>
+                </tr>
+                {% for dhis in Dhis %}
+                <tr>
+                    <td><center>{{dhis.amt}}</center></td>
+                    <td><center>{{dhis.date}}</center></td>
+                    <td><center>{{dhis.status}}</center></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

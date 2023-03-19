@@ -1,0 +1,22 @@
+{% extends 'auth/signup.html' %}
+{% block title %}login{% endblock %}
+{% block form %}
+<p class="center">LOGIN</p>
+<p style="color:red;text-align:center;">{{ error }}</p>
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="user" placeholder="email" id="email" type="email" class="validate white black-text" style="padding-left:0.5ex;" required>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="password" placeholder="password" id="password" type="password" class="validate white black-text" style="padding-left:0.5ex;" required>
+
+        </div>
+    </div>
+
+      <center><button class="btn waves-effect blue">NEXT</button></center></br>
+<p>don't have an account yet ? <a href="/signup/">signup</a></p>
+{% endblock %}
